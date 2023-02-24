@@ -1,16 +1,12 @@
-import AuthFetching from "src/auth/ui/fetching";
-import AuthUserUI from "src/auth/ui/form";
-import { GetServerSidePropsContext } from "next";
+import { AuthenticationForm, AuthenticationProps } from "@/src/auth/ui";
 
 export default function AccountPage() {
   return (
     <>
-      <AuthUserUI.Register />
-      <AuthUserUI.Unregister />
+      <AuthenticationForm.Register />
+      <AuthenticationForm.Unregister />
     </>
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  return AuthFetching.getSessionPropsOrRedirect(context);
-}
+export const getServerSideProps = AuthenticationProps.getSessionPropsOrRedirect;

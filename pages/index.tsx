@@ -1,10 +1,12 @@
 import hooks from "src/auth/ui/hooks";
 
+const { useSessionUser, useSessionStatus } = hooks;
+
 const MARGIN = { marginTop: 64 };
 
 export default function Home() {
-  const { name, email } = hooks.useSessionUser();
-  const status = hooks.useSessionStatus();
+  const { name, email } = useSessionUser();
+  const status = useSessionStatus();
   const user = name === "" ? email : name;
   return (
     <div style={MARGIN}>

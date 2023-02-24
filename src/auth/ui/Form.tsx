@@ -2,7 +2,7 @@ import { useMemo, PropsWithChildren } from "react";
 import FormProvider from "src/form/Provider";
 import FormUI from "src/form";
 
-import Hooks from "../hooks";
+import Hooks from "./hooks";
 
 const { useSession, useRegisterAccount, useUnregisterAccount } = Hooks;
 
