@@ -6,8 +6,12 @@ import FormUI from "src/form";
 
 import Hooks from "./hooks";
 
-const { useSession, useRegisterAccount, useDeleteAccount, useIsSessionStatus } =
-  Hooks;
+const {
+  useSession,
+  useRegisterAccount,
+  useUnregisterAccount,
+  useIsSessionStatus,
+} = Hooks;
 
 export default class AuthAccountUI {
   static Provider({ children }: PropsWithChildren<{}>) {
@@ -59,7 +63,7 @@ export default class AuthAccountUI {
   }
 
   static Delete() {
-    const { execute, data, error } = useDeleteAccount();
+    const { execute, data, error } = useUnregisterAccount();
     if (data?.done) return null;
     return (
       <>

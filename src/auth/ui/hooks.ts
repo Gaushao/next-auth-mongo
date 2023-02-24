@@ -25,12 +25,12 @@ export default class Hooks {
     useVisibilityChangeOn(data && !error);
     return useMemo(() => ({ execute, error }), [execute, error]);
   }
-  static useDeleteAccount() {
+  static useUnregisterAccount() {
     const [token, setToken] = useState("");
     const { data, error, execute } = useFetch<
       { token?: string; done?: boolean; error?: string },
       { name: string }
-    >(`/api/auth/account/delete?token=${token}`);
+    >(`/api/auth/account/unregister?token=${token}`);
     useEffect(() => {
       if (data?.token) setToken(data?.token);
       if (data?.done) signOut();
