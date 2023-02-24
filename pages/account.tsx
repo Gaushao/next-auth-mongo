@@ -1,12 +1,12 @@
 import AuthFetching from "src/auth/ui/fetching";
-import AuthUserUI from "src/auth/ui/Account";
+import AuthUserUI from "src/auth/ui/form";
 import { GetServerSidePropsContext } from "next";
 
 export default function AccountPage() {
   return (
     <>
       <AuthUserUI.Register />
-      <AuthUserUI.Delete />
+      <AuthUserUI.Unregister />
     </>
   );
 }

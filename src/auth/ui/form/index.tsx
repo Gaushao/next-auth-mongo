@@ -1,6 +1,4 @@
 import { useMemo, PropsWithChildren } from "react";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import FormProvider from "src/form/Provider";
 import FormUI from "src/form";
 
@@ -48,9 +46,7 @@ export default class AuthForm {
   static Register() {
     return (
       <AuthForm.Provider>
-        <Typography mt={3} variant="h5">
-          Register
-        </Typography>
+        <h3>Register</h3>
         <AuthForm.NameInput />
       </AuthForm.Provider>
     );
@@ -61,28 +57,20 @@ export default class AuthForm {
     if (data?.done) return null;
     return (
       <>
-        <Typography mt={3} variant="h5">
-          Delete Account
-        </Typography>
+        <h3>Delete Account</h3>
         {data ? (
           <>
             {data?.error ? (
-              <Typography mt={3} variant="body2" color="red">
-                {data.error}
-              </Typography>
+              <p>{data.error}</p>
             ) : (
               <>
-                <Typography m={3} variant="body2" color="red">
-                  this action is not reversible, sure to proceed?
-                </Typography>
-                <Button variant="contained" onClick={execute}>
-                  yes
-                </Button>
+                <p>this action is not reversible, sure to proceed?</p>
+                <button onClick={execute}>yes</button>
               </>
             )}
           </>
         ) : (
-          <Button onClick={execute}>delete</Button>
+          <button onClick={execute}>delete</button>
         )}
       </>
     );
