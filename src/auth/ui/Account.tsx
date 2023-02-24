@@ -6,21 +6,13 @@ import FormUI from "src/form";
 
 import Hooks from "./hooks";
 
-const {
-  useSession,
-  useRegisterAccount,
-  useUnregisterAccount,
-  useIsSessionStatus,
-} = Hooks;
+const { useSession, useRegisterAccount, useUnregisterAccount } = Hooks;
 
 export default class AuthAccountUI {
   static Provider({ children }: PropsWithChildren<{}>) {
-    const session = useSession();
-    const { unauthenticated } = useIsSessionStatus();
     const {
       user: { name },
-    } = session;
-
+    } = useSession();
     const { execute, error } = useRegisterAccount();
     const initial = useMemo(
       () => ({
@@ -41,23 +33,17 @@ export default class AuthAccountUI {
     );
   }
 
-  static NameInput() {
-    return (
-      <FormUI.InputGroup
-        id="name"
-        label="Name"
-        helper="It will be your display name"
-      />
-    );
-  }
-
   static Register() {
     return (
       <AuthAccountUI.Provider>
         <Typography mt={3} variant="h5">
           Register
         </Typography>
-        <AuthAccountUI.NameInput />
+        <FormUI.InputGroup
+          id="name"
+          label="Name"
+          helper="It will be your display name"
+        />
       </AuthAccountUI.Provider>
     );
   }
