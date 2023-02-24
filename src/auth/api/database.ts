@@ -1,11 +1,11 @@
 import Mongo from "src/mongo";
-import { ObjectId } from "src/mongo/lib";
 import { getToken } from "next-auth/jwt";
 import { getCsrfToken } from "next-auth/react";
 import type { AdapterSession, AdapterUser } from "next-auth/adapters";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import Token from "./token";
 import { Account } from "next-auth";
+import { ObjectId } from "mongodb";
 
 export default class AuthDB {
   static Mongo = Mongo;
@@ -21,11 +21,12 @@ export default class AuthDB {
     (await AuthDB.Mongo.db()).collection<AdapterSession>("sessions");
   static tokens = async () =>
     (await AuthDB.Mongo.db()).collection<{
-      _id: ObjectId;
+      _id: any;
       identifier: string;
       token: string;
       expires: Date;
     }>("verification_tokens");
+  static listUsers = async () => (await AuthDB.users()).find().toArray();
   static get getUserById() {
     return async (id?: string) => {
       return id ? await AuthDB.adapter.getUser(id) : null;

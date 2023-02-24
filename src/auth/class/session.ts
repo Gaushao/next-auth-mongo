@@ -2,25 +2,19 @@ interface UserFc {
   name?: string | null;
   email?: string | null;
 }
-enum SessionUserUserRole {
-  NONE = "NONE",
-  GUEST = "GUEST",
-  REGISTERED = "REGISTERED",
+enum UserPermission {
+  REGISTER = "REGISTER",
+  UNREGISTER = "UNREGISTER",
+  VIEW_USERS = "VIEW_USERS",
 }
+
 class SessionUser {
-  static Role = SessionUserUserRole;
   static Face = class Face implements UserFc {};
+  static Permission = UserPermission;
+  static permissions: UserPermission[] = [];
   name = "";
   email = "";
-  get role() {
-    switch (true) {
-      case this.email === "":
-        return SessionUser.Role.NONE;
-      case this.name === "":
-        return SessionUser.Role.GUEST;
-    }
-    return SessionUser.Role.REGISTERED;
-  }
+  image = "";
   constructor(initial?: UserFc) {
     if (initial)
       return {
@@ -31,9 +25,9 @@ class SessionUser {
 }
 
 enum SessionStatus {
-  loading = "loading",
-  authenticated = "authenticated",
-  unauthenticated = "unauthenticated",
+  LOADING = "loading",
+  AUTHENTICATED = "authenticated",
+  UNAUTHENTICATED = "unauthenticated",
 }
 
 interface SessionFc {
@@ -59,9 +53,8 @@ class SessionData {
 export default class Session {
   static Data = SessionData;
   static User = SessionUser;
-  static USER = new SessionUser();
   static Status = SessionStatus;
-  status = SessionStatus.unauthenticated;
+  status = SessionStatus.UNAUTHENTICATED;
   user = new SessionUser();
   constructor(initial?: SessionFc) {
     if (initial) {

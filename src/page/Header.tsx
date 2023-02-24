@@ -31,14 +31,16 @@ const pageheader: CSSProperties = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: 8,
+  padding: "0 8px",
+  borderRadius: 4,
+  border: "1px solid lightgray",
 };
 
 export default function PageHeader() {
   return (
     <div style={pageheader}>
       <Link href="/">
-        <h3>next-auth-mongo</h3>
+        <h3>/next-auth-mongo</h3>
       </Link>
       <Auth />
     </div>

@@ -1,12 +1,13 @@
-import { AuthenticationForm, AuthenticationProps } from "@/src/auth/ui";
+import { AccountUI } from "src/auth/ui";
+import AuthProps from "src/auth/api/props";
 
-export default function AccountPage() {
+export default function AccountPage({ session }: { session: any }) {
   return (
     <>
-      <AuthenticationForm.Register />
-      <AuthenticationForm.Unregister />
+      <AccountUI.Register session={session} />
+      <AccountUI.Unregister />
     </>
   );
 }
 
-export const getServerSideProps = AuthenticationProps.getSessionPropsOrRedirect;
+export const getServerSideProps = AuthProps.session;

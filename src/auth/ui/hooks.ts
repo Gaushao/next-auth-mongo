@@ -15,7 +15,7 @@ export default class Hooks {
       error: e,
       execute,
     } = useFetch<{ name?: string; error?: string }, { name: string }>(
-      "/api/auth/account/register",
+      "/api/register",
       {},
       {
         method: "POST",
@@ -30,7 +30,7 @@ export default class Hooks {
     const { data, error, execute } = useFetch<
       { token?: string; done?: boolean; error?: string },
       { name: string }
-    >(`/api/auth/account/unregister?token=${token}`);
+    >(`/api/unregister?token=${token}`);
     useEffect(() => {
       if (data?.token) setToken(data?.token);
       if (data?.done) signOut();
@@ -57,12 +57,12 @@ export default class Hooks {
     const status = Hooks.useSessionStatus();
     return useMemo(
       () =>
-        Object.keys(Session.Status).reduce(
+        Object.values(Session.Status).reduce(
           (acc, curr) => ({
             ...acc,
             [curr]: curr === status,
           }),
-          {} as Record<keyof typeof Session.Status, boolean>
+          {} as Record<typeof status, boolean>
         ),
       [status]
     );

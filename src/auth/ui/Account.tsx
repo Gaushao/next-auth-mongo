@@ -1,14 +1,13 @@
-import { useMemo, PropsWithChildren } from "react";
+import { useMemo } from "react";
 import FormProvider from "src/form/Provider";
+import Session from "../class/session";
 import FormUI from "src/form";
-
 import Hooks from "./hooks";
 
 const { useSession, useRegisterAccount, useUnregisterAccount } = Hooks;
 
-export default class AuthForm {
-  static Provider({ children }: PropsWithChildren<{}>) {
-    const session = useSession();
+export default {
+  Register({ session }: { session: Session }) {
     const {
       user: { name },
     } = session;
@@ -28,31 +27,16 @@ export default class AuthForm {
     );
     return (
       <FormProvider initial={initial} errors={errors} submit={execute}>
-        {children}
+        <h3>Register</h3>
+        <FormUI.InputGroup
+          id="name"
+          label="Name"
+          helper="It will be your display name"
+        />
       </FormProvider>
     );
-  }
-
-  static NameInput() {
-    return (
-      <FormUI.InputGroup
-        id="name"
-        label="Name"
-        helper="It will be your display name"
-      />
-    );
-  }
-
-  static Register() {
-    return (
-      <AuthForm.Provider>
-        <h3>Register</h3>
-        <AuthForm.NameInput />
-      </AuthForm.Provider>
-    );
-  }
-
-  static Unregister() {
+  },
+  Unregister() {
     const { execute, data, error } = useUnregisterAccount();
     if (data?.done) return null;
     return (
@@ -74,5 +58,5 @@ export default class AuthForm {
         )}
       </>
     );
-  }
-}
+  },
+};
