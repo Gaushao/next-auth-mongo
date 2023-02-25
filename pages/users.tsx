@@ -1,8 +1,6 @@
 import { UsersUI } from "src/auth/ui";
 import AuthProps from "src/auth/api/props";
 
-export default function UsersPage({ users }: { users: any }) {
-  return <UsersUI.Table users={users} />;
-}
+export default UsersUI.Page;
 
-export const getServerSideProps = AuthProps.getUsers;
+export const getServerSideProps = AuthProps.users;

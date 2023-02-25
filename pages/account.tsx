@@ -1,13 +1,6 @@
-import { AccountUI } from "src/auth/ui";
 import AuthProps from "src/auth/api/props";
+import { AccountUI } from "src/auth/ui";
 
-export default function AccountPage({ session }: { session: any }) {
-  return (
-    <>
-      <AccountUI.Register session={session} />
-      <AccountUI.Unregister />
-    </>
-  );
-}
+export default AccountUI.Page;
 
 export const getServerSideProps = AuthProps.session;

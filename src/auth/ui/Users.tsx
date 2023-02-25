@@ -1,6 +1,9 @@
 import { CSSProperties } from "react";
 import Session from "../class/session";
 
+type User = Session["user"];
+type Props = { users: User[] };
+
 const overflow: CSSProperties = {
   overflow: "auto",
 };
@@ -28,10 +31,10 @@ function isUrl(s: string) {
   return url.protocol === "http:" || url.protocol === "https:";
 }
 
-export default {
-  Table({ users = [] }: { users: Session["user"][] }) {
+export default class UsersUI {
+  static Table({ users = [] }: Props) {
     if (users.length === 0) return null;
-    const keys = Object.keys(users[0]) as (keyof Session["user"])[];
+    const keys = Object.keys(users[0]) as (keyof User)[];
     return (
       <div style={overflow}>
         <h3>/users</h3>
@@ -65,5 +68,8 @@ export default {
         </table>
       </div>
     );
-  },
-};
+  }
+  static Page({ users }: Props) {
+    return <UsersUI.Table users={users} />;
+  }
+}

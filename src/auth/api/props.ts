@@ -22,7 +22,7 @@ export default class AuthProps {
         : AuthProps.redirect();
     };
   }
-  static get getUsers() {
+  static get users() {
     return async (context: GetServerSidePropsContext, destination = "/") => {
       const session = await getSession(context);
       const users = (await AuthDB.listUsers()).map(

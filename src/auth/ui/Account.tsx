@@ -4,10 +4,10 @@ import Session from "../class/session";
 import FormUI from "src/form";
 import Hooks from "./hooks";
 
-const { useSession, useRegisterAccount, useUnregisterAccount } = Hooks;
+const { useRegisterAccount, useUnregisterAccount } = Hooks;
 
-export default {
-  Register({ session }: { session: Session }) {
+export default class AccountUI {
+  static Register({ session }: { session: Session }) {
     const {
       user: { name },
     } = session;
@@ -35,8 +35,8 @@ export default {
         />
       </FormProvider>
     );
-  },
-  Unregister() {
+  }
+  static Unregister() {
     const { execute, data, error } = useUnregisterAccount();
     if (data?.done) return null;
     return (
@@ -58,5 +58,13 @@ export default {
         )}
       </>
     );
-  },
-};
+  }
+  static Page({ session }: { session: Session }) {
+    return (
+      <>
+        <AccountUI.Register session={session} />
+        <AccountUI.Unregister />
+      </>
+    );
+  }
+}
