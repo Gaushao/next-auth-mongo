@@ -1,4 +1,3 @@
-import { SendVerificationRequestParams } from "next-auth/providers";
 import EmailTheme from "./theme";
 
 export default class EmailTemplate {
